@@ -1,74 +1,130 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { StyleSheet, TouchableOpacity, SafeAreaView, View as RNView } from 'react-native';
+import { Text, View } from '@/components/Themed';
+import { Colors } from '../../constants/Colors';
+import { useColorScheme } from 'react-native';
 
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
+export default function Dashboard() {
+  const colorScheme = useColorScheme() ?? 'light';
+  const colors = Colors[colorScheme];
 
-export default function HomeScreen() {
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12'
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          When you're ready, run{' '}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        {/* Main content area */}
+        <View style={styles.mainContent}>
+          <RNView style={styles.circle}>
+            {/* Placeholder for the main circle/timer display */}
+          </RNView>
+          <Text style={styles.daysText}>4 days</Text>
+          <Text style={styles.timeText}>12hr 40m 51s</Text>
+        </View>
+
+        {/* Navigation buttons */}
+        <View style={styles.navigationSection}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.circleButton}
+              onPress={() => {}}>
+              <Text style={styles.buttonText}>Breathwork</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.circleButton}
+              onPress={() => {}}>
+              <Text style={styles.buttonText}>Meditation</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.circleButton}
+              onPress={() => {}}>
+              <Text style={styles.buttonText}>Community</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Panic Button */}
+          <TouchableOpacity
+            style={styles.panicButton}
+            onPress={() => {}}>
+            <Text style={styles.panicButtonText}>Panic Button</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#0A0A1A', // Darker navy background
   },
-  stepContainer: {
-    gap: 8,
+  container: {
+    flex: 1,
+    justifyContent: 'space-between',
+  },
+  mainContent: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 40,
+  },
+  circle: {
+    width: 180,
+    height: 180,
+    borderRadius: 90,
+    backgroundColor: '#FFFFFF15',
+    marginBottom: 20,
+  },
+  daysText: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
+  timeText: {
+    fontSize: 16,
+    color: '#FFFFFF80',
+    marginBottom: 20,
+  },
+  navigationSection: {
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  circleButton: {
+    width: 65,
+    height: 65,
+    borderRadius: 32.5,
+    backgroundColor: '#1E1B38', // Deeper navy blue for buttons
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontSize: 11,
+    fontWeight: '500',
+    textAlign: 'center',
+  },
+  panicButton: {
+    backgroundColor: '#FF3B30',
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+    marginHorizontal: 4,
+  },
+  panicButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
